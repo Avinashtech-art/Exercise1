@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Date Alert</title>
+  </head>
+  <body>
+    <input type="text" id="date" placeholder="DD/MM/YYYY">
+    <button onclick="checkDate()">Submit</button>
+    <script>
+      function checkDate() {
+        var inputDate = document.getElementById("date").value;
+        var today = new Date();
+        var dateArray = inputDate.split('/');
+        var inputDateObj = new Date(dateArray[2], parseInt(dateArray[1])-1, dateArray[0]);
+        if (inputDateObj.toDateString() == today.toDateString()) {
+          alert("Today");
+        } else if (inputDateObj < today) {
+          alert("Before Today");
+        } else {
+          alert("After Today");
+        }
+      }
+    </script>
+  </body>
+</html>
