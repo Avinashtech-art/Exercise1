@@ -1,50 +1,45 @@
-
 var data = [
-    { "firstname": " Ann", "lastname": " Wilson ", "phone": "29378245", "zip": "2 0 00 1 ", "age": 160, "id": " 12345 " },
-    { "firstname": "Chris ", "lastname": "Morgan", "phone": "729378245", "zip": " 65 00 1", "age": 70, "id": " 123453543636 " },
-    { "firstname": " Andrew ", "lastname": " Storm", "phone": "543729378245", "zip": " 7001 4", "age": 32, "id": "5 648" }
+    { "firstname": " Ann", "lastname": " Wilson ", "phone": "29378245", "zip": "20001 ", "age": 160, "id": " 123678845 " },
+    { "firstname": "Chris ", "lastname": "Morgan", "phone": "729378245", "zip": " 65001", "age": 70, "id": " 12345343636 " },
+    { "firstname": " Andrew ", "lastname": " Storm", "phone": "543729378245", "zip": " 70014", "age": 32, "id": "56789648" }
 ];
 
-function formData(data) {
-    for (var i = 0; i < data.length; i++) {
-        // Remove leading and trailing whitespace from all fields
-        data[i].firstname = data[i].firstname.trim();
-        data[i].lastname = data[i].lastname.trim();
-        data[i].phone = data[i].phone.trim();
-        data[i].zip = data[i].zip.trim();
-        data[i].id = data[i].id.trim();
+var processedData = data.map(function (record) {
+    // Remove leading and trailing spaces from all fields
+    record.firstname = record.firstname.trim();
+    record.lastname = record.lastname.trim();
+    record.phone = record.phone.trim();
+    record.zip = record.zip.trim();
+    record.id = record.id.trim();
 
-        // Concatenate first name and last name to construct "Name"
-        var name = data[i].firstname + " " + data[i].lastname.trim();
-        console.log("Name : " + name);
+    // Concatenate first name and last name to construct "Name"
+    record.Name = record.firstname + " " + record.lastname;
 
-        // Format phone number
-        var phone = data[i].phone.replace(/\D/g, '');
-        if (phone.length < 10) {
-            phone = ("0000000000" + phone).slice(-10);
-        } else if (phone.length > 10) {
-            phone = phone.slice(0, 10);
-        }
-        console.log("Phone : " + phone);
-
-        // Print zip code
-        console.log("Zip : " + data[i].zip.replace(/\s/g, ''));
-
-        // Print age or "Nil" if not in range
-        var age = data[i].age;
-        if (age < 0 || age > 150) {
-            console.log("Age : Nil");
-        } else {
-            console.log("Age : " + age);
-        }
-
-        // Mask last 3 digits of ID with #
-        var id = data[i].id;
-        console.log("ID : " + id.replace(/(\d{3})$/, '###'));
-
-        // Print separator
-        console.log("-------------------------------------------------------");
+    // Format phone number
+    if (record.phone.length < 10) {
+        record.phone = "0".repeat(10 - record.phone.length) + record.phone;
+    } else if (record.phone.length > 10) {
+        record.phone = record.phone.slice(0, 10);
     }
-}
+    record.phone = record.phone.replace(/(\d{1})(\d{2})(\d{3})/, "$1$2$3");
 
-formData(data);
+    // Format age
+    if (record.age < 0 || record.age > 150) {
+        record.age = "Nil";
+    }
+
+    // Mask last 3 digits of Id with #
+    record.id = record.id.replace(/(\d{4})$/, "###");
+
+    return record;
+});
+
+// Print the processed data
+processedData.forEach(function (record) {
+    console.log("Name : " + record.Name);
+    console.log("Phone : " + record.phone);
+    console.log("zip : " + record.zip);
+    console.log("Age : " + record.age);
+    console.log("Id : " + record.id);
+    console.log("-------------------------------------------------------");
+});
