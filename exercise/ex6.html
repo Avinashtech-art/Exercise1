@@ -10,10 +10,10 @@
     <button onclick="checkDate()">Submit</button>
     <script>
         function checkDate() {
-            var inputDate = document.getElementById("date").value;
-            var today = new Date();
-            var dateArray = inputDate.split('/');
-            var inputDateObj = new Date(dateArray[2], parseInt(dateArray[1]) - 1, dateArray[0]);
+            const inputDate = document.getElementById("date").value;
+            const today = new Date();
+            const dateArray = inputDate.split('/');
+            const inputDateObj = new Date(dateArray[2], parseInt(dateArray[1]) - 1, dateArray[0]);
             if (inputDateObj.toDateString() == today.toDateString()) {
                 alert("Today");
             } else if (inputDateObj < today) {

@@ -1,10 +1,10 @@
-var data = [
+const data = [
     { "firstname": " Ann", "lastname": " Wilson ", "phone": "29378245", "zip": "20001 ", "age": 160, "id": " 123678845 " },
     { "firstname": "Chris ", "lastname": "Morgan", "phone": "729378245", "zip": " 65001", "age": 70, "id": " 12345343636 " },
     { "firstname": " Andrew ", "lastname": " Storm", "phone": "543729378245", "zip": " 70014", "age": 32, "id": "56789648" }
 ];
 
-var processedData = data.map(function (record) {
+const processedData = data.map(function (record) {
     // Remove leading and trailing spaces from all fields
     record.firstname = record.firstname.trim();
     record.lastname = record.lastname.trim();
